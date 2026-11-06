@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-body {
+  font-family: var(--font-sans);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Subtle archival cotton-paper fiber texture */
+.paper-texture {
+  background-image:
+    radial-gradient(rgba(120, 100, 80, 0.045) 1px, transparent 0),
+    radial-gradient(rgba(90, 75, 60, 0.03) 1px, transparent 0);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.paper-texture-dark {
+  background-image:
+    radial-gradient(rgba(255, 250, 240, 0.035) 1px, transparent 0),
+    radial-gradient(rgba(210, 225, 255, 0.025) 1px, transparent 0);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* Compositor-only slide & poetic text transitions */
+@keyframes slideEnterForward {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideEnterBackward {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lineFadeRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes floatPetalSlow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) rotate(0deg);
+  }
+  18% {
+    opacity: 0.55;
+  }
+  82% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(24px, 110px, 0) rotate(42deg);
+  }
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.88);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes moonHaloBreathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.03);
+  }
+}
+
+.animate-slide-forward {
+  animation: slideEnterForward 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-backward {
+  animation: slideEnterBackward 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-line-reveal {
+  animation: lineFadeRise 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-petal-float {
+  animation: floatPetalSlow var(--petal-duration, 14s) ease-in-out var(--petal-delay, 0s) infinite;
+}
+
+.animate-star-twinkle {
+  animation: starTwinkle var(--star-duration, 4.2s) ease-in-out var(--star-delay, 0s) infinite;
+}
+
+.animate-moon-halo {
+  animation: moonHaloBreathe 6.5s ease-in-out infinite;
+}
+
+/* Safe-area spacing for mobile notch/home bar */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: max(0.25rem, env(safe-area-inset-top));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-forward,
+  .animate-slide-backward {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-line-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-petal-float,
+  .animate-star-twinkle,
+  .animate-moon-halo {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
